@@ -12,6 +12,9 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.API_GITHUB_TOKEN }}
 
     steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+
       - name: Checkout code
         uses: actions/checkout@v3
 
