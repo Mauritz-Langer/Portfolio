@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title data-lang-key="docTitle">Mauritz Langer | Digitales Portfolio</title>
+    <meta name="description" content="Portfolio von Mauritz Langer, einem Full Stack Softwareentwickler mit Expertise in Wirtschaftsinformatik, DevOps und Performance Engineering." data-lang-key="metaDescription">
+    <meta property="og:title" content="Mauritz Langer | Digitales Portfolio" data-lang-key="ogTitle">
+    <meta property="og:description" content="Entdecken Sie die Projekte und Fähigkeiten von Mauritz Langer, einem Full Stack Softwareentwickler, der technische Exzellenz mit Geschäftsstrategie verbindet." data-lang-key="ogDescription">
+    <meta property="og:image" content="https://placehold.co/1200x630/1e293b/e2e8f0?text=ML">
+    <meta property="og:url" content="https://mauritz-langer.github.io/Portfolio/">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧑‍💻</text></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="antialiased">
+    <script>
+        // Set theme on initial load to prevent FOUC
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <div id="preloader"><div class="loader"></div></div>
+    <canvas id="particle-canvas"></canvas>
+
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-tighter hover:text-sky-400 transition-colors">ML</a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#about" class="text-slate-300 dark:text-slate-300 text-gray-700 hover:text-black dark:hover:text-white transition-colors" data-lang-key="navAbout"></a>
+                <a href="#experience" class="text-slate-300 dark:text-slate-300 text-gray-700 hover:text-black dark:hover:text-white transition-colors" data-lang-key="navExperience"></a>
+                <a href="#education" class="text-slate-300 dark:text-slate-300 text-gray-700 hover:text-black dark:hover:text-white transition-colors" data-lang-key="navEducation"></a>
+                <a href="#skills" class="text-slate-300 dark:text-slate-300 text-gray-700 hover:text-black dark:hover:text-white transition-colors" data-lang-key="navSkills"></a>
+                <a href="#projects" class="text-slate-300 dark:text-slate-300 text-gray-700 hover:text-black dark:hover:text-white transition-colors" data-lang-key="navProjects"></a>
+                <a href="#contact" class="bg-sky-500 hover:bg-sky-600 text-white font-medium py-2 px-4 rounded-lg transition-transform duration-300 hover:scale-105" data-lang-key="navContact"></a>
+
+                <a href="https://github.com/Mauritz-Langer" target="_blank" class="p-2 rounded-full text-gray-700 dark:text-slate-300 hover:text-black dark:hover:text-white hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors">
+                    <i data-lucide="github"></i>
+                </a>
+
+                <button id="theme-toggle" class="p-2 rounded-full text-gray-700 dark:text-slate-300 hover:text-black dark:hover:text-white hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors">
+                    <i id="theme-toggle-dark-icon" class="hidden" data-lucide="moon"></i>
+                    <i id="theme-toggle-light-icon" class="hidden" data-lucide="sun"></i>
+                </button>
+
+                <div class="flex items-center gap-2 text-sm">
+                    <button id="lang-de" class="font-bold transition-all disabled:opacity-100 disabled:cursor-default opacity-70">DE</button>
+                    <span class="text-muted">/</span>
+                    <button id="lang-en" class="font-semibold transition-all disabled:opacity-100 disabled:cursor-default opacity-70">EN</button>
+                </div>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden"><i data-lucide="menu"></i></button>
+        </nav>
+    </header>
+
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-white/90 dark:bg-black/90 backdrop-blur-sm z-40 hidden flex-col items-center justify-center space-y-8">
+        <button id="close-mobile-menu-btn" class="absolute top-6 right-6"><i data-lucide="x"></i></button>
+        <a href="#about" class="text-2xl menu-link" data-lang-key="navAbout"></a>
+        <a href="#experience" class="text-2xl menu-link" data-lang-key="navExperience"></a>
+        <a href="#education" class="text-2xl menu-link" data-lang-key="navEducation"></a>
+        <a href="#skills" class="text-2xl menu-link" data-lang-key="navSkills"></a>
+        <a href="#projects" class="text-2xl menu-link" data-lang-key="navProjects"></a>
+        <a href="#contact" class="text-2xl menu-link" data-lang-key="navContact"></a>
+        <div class="flex items-center gap-6 text-lg pt-8">
+             <a href="https://github.com/Mauritz-Langer" target="_blank" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors">
+                <i data-lucide="github"></i>
+            </a>
+             <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors">
+                <i id="theme-toggle-dark-icon-mobile" class="hidden" data-lucide="moon"></i>
+                <i id="theme-toggle-light-icon-mobile" class="hidden" data-lucide="sun"></i>
+            </button>
+            <div class="flex items-center gap-4">
+                <button id="lang-de-mobile" class="font-bold transition-all disabled:opacity-100 disabled:cursor-default opacity-70">DE</button>
+                <span class="text-muted">/</span>
+                <button id="lang-en-mobile" class="font-semibold transition-all disabled:opacity-100 disabled:cursor-default opacity-70">EN</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6">
+
+        <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center pt-20">
+            <div class="scroll-target">
+                <h1 class="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter mb-2 gradient-text" data-lang-key="heroName"></h1>
+                <p class="text-2xl md:text-4xl font-bold tracking-tight mb-4" data-lang-key="heroSlogan"></p>
+                <p id="typing-text" class="text-xl md-text-2xl text-muted max-w-3xl mx-auto h-16"></p>
+                <a href="#projects" class="mt-8 inline-block bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition-transform duration-300 hover:scale-105 transform" data-lang-key="heroButton"></a>
+            </div>
+        </section>
+
+        <section id="about" class="py-20 lg:py-32 scroll-target">
+            <div class="grid md:grid-cols-5 gap-10 items-center">
+                <div class="md:col-span-2">
+                    <img src="https://placehold.co/600x600/1e293b/e2e8f0?text=ML" alt="Ein Bild von Mauritz Langer" class="rounded-full shadow-lg w-full max-w-xs mx-auto md:max-w-full">
+                </div>
+                <div class="md:col-span-3">
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-4" data-lang-key="aboutHeadline"></h2>
+                    <p class="text-lg leading-relaxed mb-4 text-muted" data-lang-key="aboutParagraph1"></p>
+                    <p class="text-lg leading-relaxed text-muted" data-lang-key="aboutParagraph2"></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="py-20 lg:py-32">
+            <div class="text-center mb-16 scroll-target">
+                <h2 class="text-3xl lg:text-4xl font-bold" data-lang-key="experienceTitle"></h2>
+                <p class="text-lg mt-2 text-muted" data-lang-key="experienceSubtitle"></p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-container left scroll-target"><div class="timeline-content glass-card">
+                    <h3 class="text-xl font-bold" data-lang-key="exp3Title"></h3>
+                    <p class="text-sky-500 font-semibold" data-lang-key="exp3Company"></p>
+                    <p class="text-sm text-muted mb-2" data-lang-key="exp3Date"></p>
+                    <p data-lang-key="exp3Desc"></p>
+                </div></div>
+                <div class="timeline-container right scroll-target"><div class="timeline-content glass-card">
+                    <h3 class="text-xl font-bold" data-lang-key="exp2Title"></h3>
+                    <p class="text-sky-500 font-semibold" data-lang-key="exp2Company"></p>
+                    <p class="text-sm text-muted mb-2" data-lang-key="exp2Date"></p>
+                    <p data-lang-key="exp2Desc"></p>
+                </div></div>
+                <div class="timeline-container left scroll-target"><div class="timeline-content glass-card">
+                    <h3 class="text-xl font-bold" data-lang-key="exp1Title"></h3>
+                    <p class="text-sky-500 font-semibold" data-lang-key="exp1Company"></p>
+                    <p class="text-sm text-muted mb-2" data-lang-key="exp1Date"></p>
+                    <p data-lang-key="exp1Desc"></p>
+                </div></div>
+            </div>
+        </section>
+
+        <section id="education" class="py-20 lg:py-32">
+            <div class="text-center mb-16 scroll-target">
+                <h2 class="text-3xl lg:text-4xl font-bold" data-lang-key="educationTitle"></h2>
+                <p class="text-lg mt-2 text-muted" data-lang-key="educationSubtitle"></p>
+            </div>
+            <div class="timeline">
+                 <div class="timeline-container left scroll-target"><div class="timeline-content glass-card">
+                    <h3 class="text-xl font-bold" data-lang-key="edu5Title"></h3>
+                    <p class="text-sky-500 font-semibold" data-lang-key="edu5Uni"></p>
+                    <p class="text-sm text-muted mb-2" data-lang-key="edu5Date"></p>
+                </div></div>
+                <div class="timeline-container right scroll-target"><div class="timeline-content glass-card">
+                    <h3 class="text-xl font-bold" data-lang-key="edu4Title"></h3>
+                    <p class="text-sky-500 font-semibold" data-lang-key="edu4Uni"></p>
+                    <p class="text-sm text-muted mb-2" data-lang-key="edu4Date"></p>
+                </div></div>
+                <div class="timeline-container left scroll-target"><div class="timeline-content glass-card">
+                    <h3 class="text-xl font-bold" data-lang-key="edu3Title"></h3>
+                    <p class="text-sky-500 font-semibold" data-lang-key="edu3Uni"></p>
+                    <p class="text-sm text-muted mb-2" data-lang-key="edu3Date"></p>
+                </div></div>
+                 <div class="timeline-container right scroll-target"><div class="timeline-content glass-card">
+                    <h3 class="text-xl font-bold" data-lang-key="edu2Title"></h3>
+                    <p class="text-sky-500 font-semibold" data-lang-key="edu2Uni"></p>
+                    <p class="text-sm text-muted mb-2" data-lang-key="edu2Date"></p>
+                </div></div>
+                 <div class="timeline-container left scroll-target"><div class="timeline-content glass-card">
+                    <h3 class="text-xl font-bold" data-lang-key="edu1Title"></h3>
+                    <p class="text-sky-500 font-semibold" data-lang-key="edu1Uni"></p>
+                    <p class="text-sm text-muted mb-2" data-lang-key="edu1Date"></p>
+                </div></div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-20 lg:py-32">
+            <div class="text-center mb-12 scroll-target">
+                <h2 class="text-3xl lg:text-4xl font-bold" data-lang-key="skillsTitle"></h2>
+                <p class="text-lg mt-2 text-muted" data-lang-key="skillsSubtitle"></p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                 <div class="flex flex-col items-center p-4 glass-card rounded-xl scroll-target text-orange-400"><svg class="skill-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.39,2.949c-0.175-0.24-0.485-0.399-0.825-0.399s-0.65,0.159-0.825,0.399L2.83,9.859c-0.35,0.48-0.35,1.16,0,1.64 l7.735,6.91c0.175,0.24,0.485,0.399,0.825,0.399s0.65-0.159,0.825-0.399l7.735-6.91c0.35-0.48,0.35-1.16,0-1.64L11.39,2.949z M10.565,4.559l6.09,5.45l-6.09,5.425L4.475,10.009L10.565,4.559z M16.29,19.241c0.175,0,0.35-0.08,0.35-0.24c0-0.08-0.085-0.16-0.26-0.24L11.45,15.12 c-0.435-0.24-0.955-0.24-1.39,0l-4.93,3.641c-0.175,0.16-0.26,0.24-0.26,0.32c0,0.08,0.085,0.16,0.26,0.16H16.29z"/></svg><h3 class="text-lg font-semibold">Java</h3></div>
+                 <div class="flex flex-col items-center p-4 glass-card rounded-xl scroll-target text-green-500"><svg class="skill-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-12h2v2h-2zm0 4h2v6h-2z"/></svg><h3 class="text-lg font-semibold">Spring</h3></div>
+                <div class="flex flex-col items-center p-4 glass-card rounded-xl scroll-target text-purple-400"><svg class="skill-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.25 2H2v9.25h9.25V2ZM22 2h-9.25v9.25H22V2Zm-10.75 10.75H2V22h9.25v-9.25ZM22 12.75h-9.25V22H22v-9.25Z"/></svg><h3 class="text-lg font-semibold">.NET</h3></div>
+                <div class="flex flex-col items-center p-4 glass-card rounded-xl scroll-target text-yellow-400"><svg class="skill-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0V0zm17.55 18.33a.75.75 0 0 1-1.06 1.06l-1.42-1.42a.75.75 0 0 1 1.06-1.06zM9.5 16.5a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6.5a1 1 0 0 1-1 1zm5 0a1 1 0 0 1-1-1V9a1 1 0 0 1 2 0v6.5a1 1 0 0 1-1 1z"/></svg><h3 class="text-lg font-semibold">JavaScript</h3></div>
+                <div class="flex flex-col items-center p-4 glass-card rounded-xl scroll-target text-blue-500"><svg class="skill-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15 15.5h-1.5V10h-2v5.5H10V10h-2v5.5H6.5V10h-2v7h12.5v-1.5zm-5-10v-2h2v2h-2zm-3.5 0v-2h2v2h-2zm7 0v-2h2v2h-2z"/></svg><h3 class="text-lg font-semibold">TypeScript</h3></div>
+                <div class="flex flex-col items-center p-4 glass-card rounded-xl scroll-target text-sky-400"><svg class="skill-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="2.5"/><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/></svg><h3 class="text-lg font-semibold">React</h3></div>
+                 <div class="flex flex-col items-center p-4 glass-card rounded-xl scroll-target text-red-500"><svg class="skill-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L3 5.5v11L12 22l9-5.5v-11L12 2zm0 2.5l6.5 3.75L12 12 5.5 8.25 12 4.5zM4.5 7.5L11 11.5v8l-6.5-3.75v-8.25zm15 0v8.25L13 19.5v-8l6.5-4z"/></svg><h3 class="text-lg font-semibold">Angular</h3></div>
+                <div class="flex flex-col items-center p-4 glass-card rounded-xl scroll-target text-cyan-400"><svg class="skill-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21.5 12.3c0-1.2-1-2.2-2.2-2.2h-1.2v-1c0-2-1.6-3.6-3.6-3.6H9.5c-2 0-3.6 1.6-3.6 3.6v1H4.7c-1.2 0-2.2 1-2.2 2.2v.9h19v-.9zM3.5 15v1.8c0 1.2 1 2.2 2.2 2.2h12.6c1.2 0 2.2-1 2.2-2.2V15H3.5zm3.7-1.5h1.5v1.5H7.2zm3.3 0h1.5v1.5h-1.5zm3.3 0h1.5v1.5h-1.5z"/></svg><h3 class="text-lg font-semibold">Docker</h3></div>
+                <div class="flex flex-col items-center p-4 glass-card rounded-xl scroll-target text-indigo-400"><svg class="skill-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l8 4.5v9L12 22l-8-4.5v-9L12 2zm-1.5 6.5l-5 2.8v3.4l5 2.8 5-2.8v-3.4l-5-2.8zm0 1.6l3 1.7-3 1.7-3-1.7 3-1.7z"/></svg><h3 class="text-lg font-semibold">Kubernetes</h3></div>
+                <div class="flex flex-col items-center p-4 glass-card rounded-xl scroll-target text-emerald-400"><svg class="skill-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><ellipse cx="12" cy="6" rx="9" ry="3"/><path d="M3 6v12c0 1.66 4.03 3 9 3s9-1.34 9-3V6c0 .7-.82 1.34-2.18 1.8A17.5 17.5 0 0 1 12 8.5c-2.43 0-4.7-.4-6.82-.6C3.82 7.34 3 6.7 3 6z"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3c0-.7-.82-1.34-2.18-1.8A17.5 17.5 0 0 1 12 11.5c-2.43 0-4.7-.4-6.82-.6C3.82 10.34 3 11.3 3 12z"/></svg><h3 class="text-lg font-semibold">Databases</h3></div>
+                <div class="flex flex-col items-center p-4 glass-card rounded-xl scroll-target text-orange-500"><svg class="skill-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="6.5" cy="4.5" r="2.5"/><circle cx="6.5" cy="19.5" r="2.5"/><path d="M6.5 7v10"/><circle cx="17.5" cy="13.5" r="2.5"/><path d="M17.5 4.5a2.5 2.5 0 0 0-2.5 2.5v1.5L6.5 12"/></svg><h3 class="text-lg font-semibold">Git</h3></div>
+                 <div class="flex flex-col items-center p-4 glass-card rounded-xl scroll-target text-purple-500"><svg class="skill-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 4.5l9-4 9 4v9l-9 4-9-4v-9zm9 1.8l-6.5 3 6.5 3 6.5-3-6.5-3zM4.5 13.7l6.5 3v-6l-6.5-3v6z"/></svg><h3 class="text-lg font-semibold">Terraform</h3></div>
+                <div class="flex flex-col items-center p-4 glass-card rounded-xl scroll-target text-slate-400"><svg class="skill-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm4 10.5a.5.5 0 0 1-.5.5h-3v3a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-3h-3a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 .5-.5h3v-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 .5.5v2z"/></svg><h3 class="text-lg font-semibold">CI/CD</h3></div>
+                <div class="flex flex-col items-center p-4 glass-card rounded-xl scroll-target text-slate-300"><svg class="skill-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 16.93c-2.49-.49-4.49-2.49-4.93-5H11v5.93zM12 12H7.07c.44-2.51 2.44-4.51 4.93-4.93V12zm0-5.93c-2.49.49-4.49 2.49-4.93 5H12V6.07zM13 18.93v-5.93h4.93c-.44 2.51-2.44 4.51-4.93 4.93zM13 12V6.07c2.49.49 4.49 2.49 4.93 5H13z"/></svg><h3 class="text-lg font-semibold">Linux</h3></div>
+                 <div class="flex flex-col items-center p-4 glass-card rounded-xl scroll-target text-blue-400"><svg class="skill-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.5 9.5a5 5 0 0 0-9.66 1.4A5.5 5.5 0 0 0 8.5 21H18a5.5 5.5 0 0 0 .5-11.5z"/></svg><h3 class="text-lg font-semibold">Cloud & DevOps</h3></div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-20 lg:py-32">
+            <div class="text-center mb-12 scroll-target">
+                <h2 class="text-3xl lg:text-4xl font-bold" data-lang-key="projectsTitle"></h2>
+                <p class="text-lg mt-2 text-muted" data-lang-key="projectsSubtitle"></p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="group glass-card rounded-xl overflow-hidden scroll-target">
+                    <img src="https://placehold.co/600x400/1e293b/38bdf8?text=VCS" alt="Version Control Backend" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-lang-key="project1Title"></h3>
+                        <p class="text-muted mb-4" data-lang-key="project1Desc"></p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tag text-xs font-semibold px-2.5 py-1 rounded-full">Java</span>
+                            <span class="tag text-xs font-semibold px-2.5 py-1 rounded-full">Spring Boot</span>
+                        </div>
+                        <button data-modal-target="project1-modal" class="modal-open-btn inline-flex items-center text-sky-500 font-semibold hover:text-sky-400 dark:hover:text-sky-300" data-lang-key="projectLink">
+                             <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="group glass-card rounded-xl overflow-hidden scroll-target">
+                    <img src="https://placehold.co/600x400/1e293b/818cf8?text=Portfolio" alt="Portfolio Website" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-lang-key="project2Title"></h3>
+                        <p class="text-muted mb-4" data-lang-key="project2Desc"></p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tag text-xs font-semibold px-2.5 py-1 rounded-full">HTML</span>
+                            <span class="tag text-xs font-semibold px-2.5 py-1 rounded-full">TailwindCSS</span>
+                             <span class="tag text-xs font-semibold px-2.5 py-1 rounded-full">JavaScript</span>
+                        </div>
+                        <button data-modal-target="project2-modal" class="modal-open-btn inline-flex items-center text-sky-500 font-semibold hover:text-sky-400 dark:hover:text-sky-300" data-lang-key="projectLink">
+                             <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="group glass-card rounded-xl overflow-hidden scroll-target">
+                    <img src="https://placehold.co/600x400/1e293b/c084fc?text=Wasserball" alt="Wasserball Tabelle" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-lang-key="project3Title"></h3>
+                        <p class="text-muted mb-4" data-lang-key="project3Desc"></p>
+                         <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tag text-xs font-semibold px-2.5 py-1 rounded-full">Angular</span>
+                            <span class="tag text-xs font-semibold px-2.5 py-1 rounded-full">FastAPI</span>
+                        </div>
+                        <button data-modal-target="project3-modal" class="modal-open-btn inline-flex items-center text-sky-500 font-semibold hover:text-sky-400 dark:hover:text-sky-300" data-lang-key="projectLink">
+                             <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- Project 4 -->
+                 <div class="group glass-card rounded-xl overflow-hidden scroll-target">
+                    <img src="https://placehold.co/600x400/1e293b/f472b6?text=Thesis" alt="Thesis Template" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-lang-key="project4Title"></h3>
+                        <p class="text-muted mb-4" data-lang-key="project4Desc"></p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tag text-xs font-semibold px-2.5 py-1 rounded-full">LaTeX</span>
+                            <span class="tag text-xs font-semibold px-2.5 py-1 rounded-full">CI/CD</span>
+                        </div>
+                        <button data-modal-target="project4-modal" class="modal-open-btn inline-flex items-center text-sky-500 font-semibold hover:text-sky-400 dark:hover:text-sky-300" data-lang-key="projectLink">
+                             <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 lg:py-32">
+             <div class="text-center max-w-3xl mx-auto scroll-target">
+                <h2 class="text-3xl lg:text-4xl font-bold" data-lang-key="contactTitle"></h2>
+                <p class="text-lg mt-2 mb-12 text-muted" data-lang-key="contactSubtitle"></p>
+
+                <div id="ai-chat-container" class="glass-card rounded-xl p-4 md:p-6 text-left max-w-3xl mx-auto">
+                    <h3 class="text-xl font-bold text-center mb-4" data-lang-key="aiChatTitle"></h3>
+                    <div id="chat-box" class="h-64 overflow-y-auto mb-4 pr-2 space-y-4">
+                        <div class="flex items-start gap-3">
+                            <div class="bg-sky-500 p-2 rounded-full flex-shrink-0"><i data-lucide="sparkles" class="w-5 h-5 text-white"></i></div>
+                            <div>
+                                <p class="font-bold text-sky-500" data-lang-key="aiName"></p>
+                                <div class="bg-gray-200 dark:bg-slate-700 rounded-lg p-3 mt-1 inline-block"><p data-lang-key="aiGreeting"></p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <form id="chat-form" class="flex items-center gap-3">
+                        <input type="text" id="chat-input" data-lang-key="aiPlaceholder" class="w-full border rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder-text-gray-400">
+                        <button type="submit" id="chat-submit-btn" class="bg-sky-500 hover:bg-sky-600 text-white font-medium p-2 rounded-lg transition-transform duration-300 hover:scale-105 disabled:bg-slate-600 disabled:cursor-not-allowed"><i data-lucide="send" class="w-5 h-5"></i></button>
+                    </form>
+                </div>
+
+                <div class="mt-16 w-full max-w-xl mx-auto">
+                    <h3 class="text-2xl font-bold text-center mb-6" data-lang-key="contactFormTitle"></h3>
+                    <!--
+                        HOW TO USE THIS FORM:
+                        1. Go to https://formspree.io/ and create a new form.
+                        2. Replace 'your-unique-id' in the action URL below with your own Formspree endpoint ID.
+                    -->
+                    <form action="https://formspree.io/f/your-unique-id" method="POST" class="space-y-4">
+                        <div>
+                            <label for="name" class="block mb-2 text-sm font-medium text-left" data-lang-key="formNameLabel"></label>
+                            <input type="text" id="name" name="name" class="form-input w-full p-2.5 rounded-lg border focus:ring-sky-500 focus:border-sky-500 text-gray-900 dark:text-white placeholder:text-gray-500" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block mb-2 text-sm font-medium text-left" data-lang-key="formEmailLabel"></label>
+                            <input type="email" id="email" name="email" class="form-input w-full p-2.5 rounded-lg border focus:ring-sky-500 focus:border-sky-500 text-gray-900 dark:text-white placeholder:text-gray-500" required>
+                        </div>
+                        <div>
+                            <label for="message" class="block mb-2 text-sm font-medium text-left" data-lang-key="formMessageLabel"></label>
+                            <textarea id="message" name="message" rows="4" class="form-input w-full p-2.5 rounded-lg border focus:ring-sky-500 focus:border-sky-500 text-gray-900 dark:text-white placeholder:text-gray-500" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-lg transition-transform duration-300 hover:scale-105" data-lang-key="formSubmitButton"></button>
+                    </form>
+                </div>
+
+                <div class="mt-12">
+                    <p class="text-muted mb-2" data-lang-key="contactOr"></p>
+                    <div class="flex justify-center items-center gap-6">
+                        <a href="https://linkedin.com/in/mauritz-langer" target="_blank" class="text-2xl font-semibold gradient-text hover:brightness-125 transition-all duration-300">LinkedIn</a>
+                        <span class="text-muted text-xl">|</span>
+                        <a href="https://github.com/Mauritz-Langer" target="_blank" class="text-2xl font-semibold gradient-text hover:brightness-125 transition-all duration-300">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-200 dark:border-slate-800">
+        <div class="container mx-auto px-6 py-8 text-center text-muted">
+            <p data-lang-key="footerText"></p>
+        </div>
+    </footer>
+
+    <button id="scroll-to-top" title="Nach oben scrollen"><i data-lucide="arrow-up"></i></button>
+
+    <!-- Project Modals -->
+    <div id="project1-modal" class="modal-overlay">
+        <div class="modal-content glass-card">
+            <button class="modal-close-btn" data-modal-close><i data-lucide="x"></i></button>
+            <h2 class="text-2xl font-bold mb-4" data-lang-key="project1Title"></h2>
+            <div class="space-y-4 text-muted">
+                <div><h3 class="font-bold text-lg" data-lang-key="modalProblemTitle"></h3><p data-lang-key="p1ModalProblem"></p></div>
+                <div><h3 class="font-bold text-lg" data-lang-key="modalRoleTitle"></h3><p data-lang-key="p1ModalRole"></p></div>
+                <div><h3 class="font-bold text-lg" data-lang-key="modalChallengeTitle"></h3><p data-lang-key="p1ModalChallenge"></p></div>
+                <div><h3 class="font-bold text-lg" data-lang-key="modalResultTitle"></h3><p data-lang-key="p1ModalResult"></p></div>
+            </div>
+            <a href="https://github.com/Mauritz-Langer/VersionControlBackend" target="_blank" class="mt-6 inline-flex items-center bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-lg">
+                <i data-lucide="github" class="w-5 h-5 mr-2"></i><span data-lang-key="modalGithubLink"></span>
+            </a>
+        </div>
+    </div>
+    <div id="project2-modal" class="modal-overlay">
+        <div class="modal-content glass-card">
+            <button class="modal-close-btn" data-modal-close><i data-lucide="x"></i></button>
+            <h2 class="text-2xl font-bold mb-4" data-lang-key="project2Title"></h2>
+            <div class="space-y-4 text-muted">
+                <div><h3 class="font-bold text-lg" data-lang-key="modalProblemTitle"></h3><p data-lang-key="p2ModalProblem"></p></div>
+                <div><h3 class="font-bold text-lg" data-lang-key="modalRoleTitle"></h3><p data-lang-key="p2ModalRole"></p></div>
+                <div><h3 class="font-bold text-lg" data-lang-key="modalChallengeTitle"></h3><p data-lang-key="p2ModalChallenge"></p></div>
+                <div><h3 class="font-bold text-lg" data-lang-key="modalResultTitle"></h3><p data-lang-key="p2ModalResult"></p></div>
+            </div>
+             <a href="https://github.com/Mauritz-Langer/Portfolio" target="_blank" class="mt-6 inline-flex items-center bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-lg">
+                <i data-lucide="github" class="w-5 h-5 mr-2"></i><span data-lang-key="modalGithubLink"></span>
+            </a>
+        </div>
+    </div>
+    <div id="project3-modal" class="modal-overlay">
+        <div class="modal-content glass-card">
+            <button class="modal-close-btn" data-modal-close><i data-lucide="x"></i></button>
+            <h2 class="text-2xl font-bold mb-4" data-lang-key="project3Title"></h2>
+             <div class="space-y-4 text-muted">
+                <div><h3 class="font-bold text-lg" data-lang-key="modalProblemTitle"></h3><p data-lang-key="p3ModalProblem"></p></div>
+                <div><h3 class="font-bold text-lg" data-lang-key="modalRoleTitle"></h3><p data-lang-key="p3ModalRole"></p></div>
+                <div><h3 class="font-bold text-lg" data-lang-key="modalChallengeTitle"></h3><p data-lang-key="p3ModalChallenge"></p></div>
+                <div><h3 class="font-bold text-lg" data-lang-key="modalResultTitle"></h3><p data-lang-key="p3ModalResult"></p></div>
+            </div>
+             <a href="https://github.com/Mauritz-Langer/Wasserball-Tabelle" target="_blank" class="mt-6 inline-flex items-center bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-lg">
+                <i data-lucide="github" class="w-5 h-5 mr-2"></i><span data-lang-key="modalGithubLink"></span>
+            </a>
+        </div>
+    </div>
+    <div id="project4-modal" class="modal-overlay">
+        <div class="modal-content glass-card">
+            <button class="modal-close-btn" data-modal-close><i data-lucide="x"></i></button>
+            <h2 class="text-2xl font-bold mb-4" data-lang-key="project4Title"></h2>
+            <div class="space-y-4 text-muted">
+                <div><h3 class="font-bold text-lg" data-lang-key="modalProblemTitle"></h3><p data-lang-key="p4ModalProblem"></p></div>
+                <div><h3 class="font-bold text-lg" data-lang-key="modalRoleTitle"></h3><p data-lang-key="p4ModalRole"></p></div>
+                <div><h3 class="font-bold text-lg" data-lang-key="modalChallengeTitle"></h3><p data-lang-key="p4ModalChallenge"></p></div>
+                <div><h3 class="font-bold text-lg" data-lang-key="modalResultTitle"></h3><p data-lang-key="p4ModalResult"></p></div>
+            </div>
+             <a href="https://github.com/Mauritz-Langer/ThesisTemplate" target="_blank" class="mt-6 inline-flex items-center bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-lg">
+                <i data-lucide="github" class="w-5 h-5 mr-2"></i><span data-lang-key="modalGithubLink"></span>
+            </a>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

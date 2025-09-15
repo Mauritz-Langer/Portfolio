@@ -1,0 +1,309 @@
+:root {
+    --bg-color: linear-gradient(-45deg, #f0f9ff, #e0f2fe, #dbeafe, #c7d2fe);
+    --text-color: #1e293b;
+    --text-muted-color: #475569;
+    --card-bg: rgba(255, 255, 255, 0.6);
+    --card-border: rgba(0, 0, 0, 0.08);
+    --timeline-line: #3b82f6;
+    --timeline-dot-bg: #f8fafc;
+    --timeline-dot-border: #3b82f6;
+    --header-bg: rgba(255, 255, 255, 0.5);
+    --chat-input-bg: #e2e8f0;
+    --particle-rgb: 59, 130, 246;
+    --gradient-1: #0ea5e9;
+    --gradient-2: #6366f1;
+    --gradient-3: #a855f7;
+    --tag-bg: #e2e8f0;
+    --tag-text: #334155;
+    --modal-overlay-bg: rgba(24, 24, 27, 0.5);
+}
+
+html.dark {
+    --bg-color: linear-gradient(-45deg, #0a0a0a, #111827, #1e1b4b, #0284c7);
+    --text-color: #e2e8f0;
+    --text-muted-color: #94a3b8;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --timeline-line: #38bdf8;
+    --timeline-dot-bg: #111827;
+    --timeline-dot-border: #38bdf8;
+    --header-bg: rgba(17, 24, 39, 0.5);
+    --chat-input-bg: #1f2937;
+    --particle-rgb: 129, 140, 248;
+    --gradient-1: #38bdf8;
+    --gradient-2: #818cf8;
+    --gradient-3: #c084fc;
+    --tag-bg: #374151;
+    --tag-text: #d1d5db;
+    --modal-overlay-bg: rgba(0, 0, 0, 0.7);
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-color);
+    background-size: 400% 400%;
+    animation: gradientAnimation 20s ease infinite;
+    color: var(--text-color);
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, var(--gradient-1), var(--gradient-2), var(--gradient-3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--card-border);
+}
+
+.text-muted {
+    color: var(--text-muted-color);
+}
+
+.tag {
+    background-color: var(--tag-bg);
+    color: var(--tag-text);
+}
+
+/* Timeline Styles */
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background-color: var(--timeline-line);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+    border-radius: 3px;
+}
+
+.timeline-container {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+}
+
+.timeline-container.left {
+    left: 0;
+}
+
+.timeline-container.right {
+    left: 50%;
+}
+
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: -17px;
+    background-color: var(--timeline-dot-bg);
+    border: 4px solid var(--timeline-dot-border);
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.timeline-container.right::after {
+    left: -16px;
+}
+
+.timeline-content {
+    padding: 20px 30px;
+    position: relative;
+    border-radius: 0.75rem;
+}
+
+/* Header Styles */
+#header.scrolled {
+    background-color: var(--header-bg);
+}
+
+#chat-input, .form-input {
+    background-color: var(--chat-input-bg);
+    border-color: var(--card-border);
+}
+
+/* Scroll Animation */
+.scroll-target {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-target.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Particle Canvas */
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Preloader */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0a0a0a;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+#preloader.loaded {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader {
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 8px solid #38bdf8;
+    border-right-color: #1e1b4b;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Scroll to Top Button */
+#scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #0ea5e9;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+    z-index: 50;
+}
+
+#scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#scroll-to-top:hover {
+    transform: scale(1.1);
+    background-color: #0284c7;
+}
+
+/* Skill Icons */
+.skill-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0.75rem;
+    fill: currentColor;
+    transition: color 0.3s;
+}
+
+.glass-card:hover .skill-icon {
+    color: #38bdf8;
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--modal-overlay-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    max-width: 640px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    position: relative;
+    transform: scale(0.95);
+    transition: transform 0.3s;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+    .timeline::after {
+        left: 31px;
+    }
+
+    .timeline-container {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+
+    .timeline-container.right {
+        left: 0%;
+    }
+
+    .timeline-container.left::after,
+    .timeline-container.right::after {
+        left: 15px;
+    }
+}
