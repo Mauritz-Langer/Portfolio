@@ -1,146 +1,87 @@
-# Portfolio Website - Mauritz Langer
+# Mauritz Langer - Personal Portfolio
 
-Ein modernes, interaktives Portfolio mit KI-Integration, das meine Fähigkeiten als Full Stack Software Developer demonstriert.
+Welcome to my personal portfolio website repository! This project showcases my work, skills, and professional journey as a Full Stack Software Engineer. It is designed with a modern, dark-themed aesthetic and built for performance and responsiveness.
 
 ## 🚀 Features
 
-- **Responsive Design**: Optimiert für alle Geräte und Bildschirmgrößen
-- **Dark/Light Mode**: Automatischer Theme-Wechsel mit localStorage-Persistierung
-- **Mehrsprachig**: Deutsch und Englisch mit dynamischer Übersetzung
-- **KI-Chat Integration**: Interaktiver AI-Assistent mit Gemini API
-- **Animierte Partikel**: Dynamischer Hintergrund mit Canvas-basierter Animation
-- **Scroll Animationen**: Smooth scrolling mit IntersectionObserver
-- **Projekt Modals**: Detaillierte Projektbeschreibungen in Overlay-Fenstern
-- **Kontaktformular**: Integration mit Formspree für E-Mail-Versendung
+- **Modern Tech Stack**: Built with React, TypeScript, and Tailwind CSS.
+- **Dark Mode Support**: Seamless switching between light and dark themes, respecting system preferences by default.
+- **Internationalization (i18n)**: Full support for German and English languages.
+- **Responsive Design**: Optimized for all devices, from mobile phones to large desktop screens.
+- **Interactive UI**: Smooth animations, scroll-spy navigation, and interactive elements powered by modern CSS and React hooks.
+- **Contact Form**: Integrated contact form that generates mail-to links for direct communication.
+- **SEO Optimized**: Dynamic meta tags and structured data for better search engine visibility.
 
-## 🛠️ Technologien
+## 🛠️ Tech Stack
 
-- **Frontend**: HTML5, CSS3 (mit CSS Custom Properties), Vanilla JavaScript
-- **Styling**: TailwindCSS, Custom CSS Animations
-- **Icons**: Lucide Icons
-- **Fonts**: Inter (Google Fonts)
-- **AI Integration**: Google Gemini API
-- **Form Handling**: Formspree
-- **Deployment**: GitHub Pages
+- **Frontend Framework**: React
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+- **Build Tool**: Vite
 
-## 📁 Projektstruktur
+## 📂 Project Structure
 
 ```
-Portfolio/
-├── index.html              # Hauptseite
-├── css/
-│   └── styles.css          # Custom CSS und Animationen
-├── js/
-│   └── main.js            # JavaScript Funktionalität
-├── assets/
-│   └── images/            # Bilder und Assets
-├── docs/                  # Dokumentation
-├── README.md              # Projektbeschreibung
-├── LICENSE               # MIT Lizenz
-└── .gitignore           # Git Ignore Datei
+src/
+├── assets/          # Images and static assets
+├── components/      # Reusable UI components (Buttons, Cards, etc.)
+├── App.tsx          # Main application component
+├── main.tsx         # Entry point
+├── index.css        # Global styles and Tailwind directives
+└── vite-env.d.ts    # Vite type definitions
 ```
 
-## 🚀 Schnellstart
+## 🚀 Getting Started
 
-### Voraussetzungen
-- Moderner Webbrowser
-- (Optional) Lokaler Webserver für Development
+To run this project locally, follow these steps:
 
-### Installation
+1.  **Clone the repository:**
+    ```sh
+    git clone https://github.com/Mauritz-Langer/portfolio.git
+    cd portfolio
+    ```
 
-1. Repository klonen:
-```bash
-git clone https://github.com/Mauritz-Langer/Portfolio.git
-cd Portfolio
-```
+2.  **Install dependencies:**
+    ```sh
+    npm install
+    # or
+    yarn install
+    ```
 
-2. Projekt öffnen:
-```bash
-# Mit Live Server (VS Code Extension)
-# Oder einfach index.html im Browser öffnen
-open index.html
-```
+3.  **Start the development server:**
+    ```sh
+    npm run dev
+    # or
+    yarn dev
+    ```
 
-### Konfiguration
+4.  **Open your browser:**
+    Navigate to [http://localhost:5173](http://localhost:5173) to view the application.
 
-#### KI-Chat Setup
-1. Gemini API Key bei [Google AI Studio](https://makersuite.google.com/app/apikey) erstellen
-2. API Key in `js/main.js` einfügen:
+## 🎨 Customization
+
+### Tailwind Configuration
+
+The project uses a custom Tailwind configuration to enable class-based dark mode. Ensure your `tailwind.config.js` includes:
+
 ```javascript
-const apiKey = "YOUR_GEMINI_API_KEY_HERE";
-```
-
-#### Kontaktformular Setup
-1. Formspree Account erstellen: [formspree.io](https://formspree.io/)
-2. Neues Formular erstellen und Endpoint-ID kopieren
-3. Action-URL in `index.html` anpassen:
-```html
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-```
-
-## 🎨 Anpassung
-
-### Farben und Themes
-Die Farben sind über CSS Custom Properties definiert und können in `css/styles.css` angepasst werden:
-
-```css
-:root {
-    --gradient-1: #0ea5e9;
-    --gradient-2: #6366f1;
-    --gradient-3: #a855f7;
-    /* ... weitere Variablen */
+export default {
+  darkMode: 'class',
+  // ... rest of the config
 }
 ```
 
-### Inhalte ändern
-Alle Texte sind in der `translations` Konstante in `js/main.js` gespeichert und können dort bearbeitet werden.
+### Content
 
-### Projekte hinzufügen
-1. Neue Projekt-Sektion in `index.html` hinzufügen
-2. Modal-HTML ergänzen
-3. Übersetzungen in `js/main.js` hinzufügen
+All text content is managed within the `translations` object in `src/App.tsx`. To update your portfolio information, simply edit the respective fields in the `de` (German) and `en` (English) sections.
 
-## 📱 Browser-Unterstützung
+## 📄 License
 
-- Chrome 88+
-- Firefox 85+
-- Safari 14+
-- Edge 88+
-
-## 🔧 Development
-
-### Lokale Entwicklung
-```bash
-# Mit Python
-python -m http.server 8000
-
-# Mit Node.js
-npx serve .
-
-# Mit PHP
-php -S localhost:8000
-```
-
-### Code-Stil
-- Verwendung von modernem ES6+ JavaScript
-- CSS Custom Properties für Theming
-- Semantic HTML5
-- Mobile-First Responsive Design
-
-## 📄 Lizenz
-
-Dieses Projekt steht unter der MIT-Lizenz. Siehe [LICENSE](LICENSE) für Details.
-
-## 🤝 Contributing
-
-Beiträge sind willkommen! Bitte erstellen Sie einen Fork und einen Pull Request für Verbesserungen.
-
-## 📞 Kontakt
-
-- **LinkedIn**: [Mauritz Langer](https://linkedin.com/in/mauritz-langer)
-- **GitHub**: [Mauritz-Langer](https://github.com/Mauritz-Langer)
-- **Website**: [Portfolio](https://mauritz-langer.github.io/Portfolio/)
+This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-**© 2025 Mauritz Langer. Alle Rechte vorbehalten.**
+**Mauritz Langer - Software Developer**
+
+[GitHub](https://github.com/Mauritz-Langer) | [LinkedIn](https://www.linkedin.com/in/mauritz-langer/)
